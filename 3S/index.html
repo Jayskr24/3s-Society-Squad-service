@@ -257,6 +257,33 @@
         .form-container label { display: block; margin-bottom: 8px; color: #ddd; font-size: 14px; font-weight: 600; }
         .form-container input, .form-container select { width: 100%; padding: 14px; background: #2d2d2d; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 15px; transition: 0.2s; }
         .form-container input:focus, .form-container select:focus { outline: none; border-color: #ffbf00; box-shadow: 0 0 8px rgba(255, 191, 0, 0.2); }
+        
+        /* Checkbox Styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: -12px;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        .checkbox-group span {
+            color: #bbb;
+            font-size: 14px;
+            user-select: none;
+        }
+
+        /* Hidden WhatsApp Input Transition */
+        #whatsapp-input-container {
+            display: none;
+            transition: all 0.3s ease;
+        }
+
         .submit-btn { display: inline-block; width: 100%; background: #ffbf00; color: #121212; padding: 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; transition: 0.2s; margin-top: 10px; }
         .submit-btn:hover { background: #e0a800; }
         .privacy-note { text-align: center; font-size: 12px; color: #666; margin-top: 15px; }
@@ -502,8 +529,20 @@
 
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" name="data[phone]" placeholder="Enter mobile number" required>
+                    <input type="tel" id="primary-phone" name="data[phone]" placeholder="Enter mobile number" required>
                 </div>
+
+                <!-- NEW: WhatsApp Checkbox and Dynamic Input -->
+                <label class="checkbox-group">
+                    <input type="checkbox" id="is-whatsapp" name="data[same_as_whatsapp]" value="Yes" checked>
+                    <span>This is also my WhatsApp number</span>
+                </label>
+
+                <div class="form-group" id="whatsapp-input-container">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="whatsapp-phone" name="data[whatsapp]" placeholder="Enter WhatsApp number">
+                </div>
+                <!-- --------------------------------------- -->
 
                 <div class="form-group">
                     <label>Select Your Society</label>
@@ -550,6 +589,24 @@
 
     <!-- DATABASE INTERACTION JAVASCRIPT -->
     <script>
+        // NEW: Toggle WhatsApp Input field logic
+        const whatsappCheckbox = document.getElementById('is-whatsapp');
+        const whatsappContainer = document.getElementById('whatsapp-input-container');
+        const whatsappInputField = document.getElementById('whatsapp-phone');
+        const primaryPhoneField = document.getElementById('primary-phone');
+
+        whatsappCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                whatsappContainer.style.display = 'none';
+                whatsappInputField.removeAttribute('required');
+                whatsappInputField.value = ''; // clear if they typed something
+            } else {
+                whatsappContainer.style.display = 'block';
+                whatsappInputField.setAttribute('required', 'true');
+            }
+        });
+
+        // Form Submit Logic
         var form = document.getElementById('sheetdb-form');
         form.addEventListener("submit", e => {
           e.preventDefault();
@@ -560,9 +617,17 @@
           button.innerHTML = "Processing Booking...";
           button.style.background = "#aaaaaa";
 
+          // Create FormData Object
+          let formData = new FormData(form);
+
+          // AGAR Checkbox ticked hai, toh dynamically primary phone ko hi whatsapp column me daal denge sheetdb ke liye
+          if (whatsappCheckbox.checked) {
+              formData.set('data[whatsapp]', primaryPhoneField.value);
+          }
+
           fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc?sheet=Booking', {
               method : 'POST',
-              body: new FormData(document.getElementById("sheetdb-form")),
+              body: formData,
           }).then(
               response => response.json()
           ).then((html) => {
@@ -571,6 +636,7 @@
              button.style.color = "#ffffff";
              
              form.reset();
+             whatsappContainer.style.display = 'none'; // reset to hidden state
              
              alert('Thank you for booking, our team will contact you as soon as possible ✨ 🎉');
              
@@ -583,6 +649,7 @@
               alert('Something went wrong. Please check your internet connection.');
               button.innerHTML = originalText;
               button.style.background = "#ffbf00";
+              button.style.color = "#121212";
           });
         });
     </script>

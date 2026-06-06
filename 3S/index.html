@@ -555,11 +555,12 @@
           e.preventDefault();
           
           const button = document.getElementById('submit-text');
+          const originalText = button.innerHTML;
+          
           button.innerHTML = "Processing Booking...";
           button.style.background = "#aaaaaa";
 
-          // PASTE YOUR SHEETDB API URL HERE BELOW
-          fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc'), {
+          fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc', {
               method : 'POST',
               body: new FormData(document.getElementById("sheetdb-form")),
           }).then(
@@ -568,20 +569,22 @@
              button.innerHTML = "✓ Booking Successful!";
              button.style.background = "#28a745";
              button.style.color = "#ffffff";
+             
              form.reset();
-             alert('Thank you! Your private slot has been locked into our database. The 3S Team will contact you shortly.');
+             
+             alert('Thank you for booking, our team will contact you as soon as possible ✨ 🎉');
+             
              setTimeout(() => {
-                 button.innerHTML = "Submit Booking Request";
+                 button.innerHTML = originalText;
                  button.style.background = "#ffbf00";
                  button.style.color = "#121212";
              }, 4000);
           }).catch(error => {
               alert('Something went wrong. Please check your internet connection.');
-              button.innerHTML = "Submit Booking Request";
+              button.innerHTML = originalText;
               button.style.background = "#ffbf00";
           });
         });
     </script>
-
 </body>
 </html>

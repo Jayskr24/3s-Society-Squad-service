@@ -559,7 +559,7 @@
           button.innerHTML = "Processing Booking...";
           button.style.background = "#aaaaaa";
 
-          fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc', {
+          fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc?sheet=Booking', {
               method : 'POST',
               body: new FormData(document.getElementById("sheetdb-form")),
           }).then(

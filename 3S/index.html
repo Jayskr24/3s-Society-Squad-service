@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Society Squad Services | 3S Team</title>
+    <style>
+        :root {
+            --primary: #0f172a; /* Slate 900 */
+            --secondary: #2563eb; /* Royal Blue */
+            --accent: #f59e0b; /* Amber Amber */
+            --light-bg: #f8fafc; /* Slate 50 */
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --form-bg: #1e1e1e;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { 
+            color: var(--text-dark); 
+            background: #ffffff; 
+            line-height: 1.7; 
+        }
+
+        /* Glassmorphism Sticky Nav Bar */
+        header { 
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            color: white; 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            letter-spacing: 1.5px; 
+        }
+        
+        .logo span { 
+            color: var(--accent); 
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-btn { 
+            background: var(--accent); 
+            color: var(--primary); 
+            padding: 0.6rem 1.4rem; 
+            font-weight: 700; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 14 rgba(245, 158, 11, 0.3);
+        }
+        
+        .contact-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Floating Premium Fixed Booking Button */
+        .floating-booking-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ffbf00;
+            color: #121212;
+            padding: 16px 28px;
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(255, 191, 0, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid #121212;
+        }
+
+        .floating-booking-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(255, 191, 0, 0.6);
+            background: #e0a800;
+        }
+
+        /* Hero Splash Banner */
+        .hero { 
+            background: radial-gradient(circle at center, rgba(15, 23, 42, 0.88), var(--primary)), 
+                        url(BACKground.avif) center/cover; 
+            color: white; 
+            text-align: center; 
+            padding: 8rem 1rem 6rem; 
+        }
+        
+        .hero h1 { 
+            font-size: 3.2rem; 
+            font-weight: 800;
+            margin-bottom: 1.5rem; 
+            letter-spacing: -1px;
+        }
+        
+        .hero p { 
+            font-size: 1.25rem; 
+            max-width: 650px; 
+            margin: 0 auto 2.5rem; 
+            color: #94a3b8;
+        }
+        
+        .badge { 
+            background: rgba(245, 158, 11, 0.15); 
+            color: var(--accent);
+            padding: 0.5rem 1.2rem; 
+            border-radius: 30px; 
+            font-size: 0.85rem; 
+            font-weight: 700;
+            display: inline-block; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Dynamic Service Sections */
+        .service-section {
+            padding: 6rem 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .service-section:nth-child(even) {
+            background-color: var(--light-bg);
+            flex-direction: row-reverse;
+        }
+
+        .service-content {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .service-visual {
+            flex: 1;
+            background: #e2e8f0;
+            height: 350px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .service-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-content h2 {
+            font-size: 2.4rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-content ul {
+            list-style: none;
+        }
+
+        .service-content ul li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: #334155;
+        }
+
+        .service-content ul li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Integrated Private Booking Form Section */
+        .booking-portal-section {
+            background: #121212;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: 4px solid var(--accent);
+        }
+
+        .form-container { 
+            max-width: 600px; 
+            width: 100%; 
+            background: var(--form-bg); 
+            padding: 40px 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 12px 32px rgba(0,0,0,0.7); 
+            border: 1px solid #333; 
+        }
+
+        .form-container h2 { text-align: center; color: #ffbf00; margin-bottom: 10px; font-size: 30px; font-weight: 800; }
+        .form-container p.subtitle { text-align: center; color: #aaa; margin-bottom: 35px; font-size: 14px; }
+        .form-group { margin-bottom: 24px; }
+        .form-container label { display: block; margin-bottom: 8px; color: #ddd; font-size: 14px; font-weight: 600; }
+        .form-container input, .form-container select { width: 100%; padding: 14px; background: #2d2d2d; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 15px; transition: 0.2s; }
+        .form-container input:focus, .form-container select:focus { outline: none; border-color: #ffbf00; box-shadow: 0 0 8px rgba(255, 191, 0, 0.2); }
+        .submit-btn { display: inline-block; width: 100%; background: #ffbf00; color: #121212; padding: 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; transition: 0.2s; margin-top: 10px; }
+        .submit-btn:hover { background: #e0a800; }
+        .privacy-note { text-align: center; font-size: 12px; color: #666; margin-top: 15px; }
+
+        /* Footer Call To Action */
+        .cta-section { 
+            background: var(--primary); 
+            color: white; 
+            text-align: center; 
+            padding: 5rem 1rem; 
+        }
+        
+        .cta-section h2 { 
+            font-size: 2.5rem; 
+            font-weight: 800;
+            margin-bottom: 1rem; 
+        }
+        
+        .phone-link { 
+            display: inline-block; 
+            font-size: 2.5rem; 
+            color: var(--accent); 
+            text-decoration: none; 
+            font-weight: 800; 
+            margin: 1.5rem 0; 
+            transition: 0.3s ease; 
+        }
+        
+        .phone-link:hover { 
+            transform: scale(1.05); 
+        }
+        
+        .footer-text { 
+            font-size: 0.9rem; 
+            color: #64748b;
+            margin-top: 4rem; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            padding-top: 2rem; 
+        }
+
+        /* Mobile Optimization */
+        @media(max-width: 968px) {
+            header { flex-direction: column; gap: 1rem; padding: 1.5rem 1rem; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+            nav a { font-size: 0.85rem; padding: 0.4rem 0.6rem; }
+            .service-section, .service-section:nth-child(even) { flex-direction: column; padding: 4rem 5%; gap: 2rem; }
+            .service-visual { width: 100%; height: 250px; }
+            .hero h1 { font-size: 2.2rem; }
+            .phone-link { font-size: 1.8rem; }
+            .floating-booking-btn { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Floating Booking Button -->
+    <a href="#booking-portal" class="floating-booking-btn">
+        ⚡ Book Service Slot
+    </a>
+
+    <!-- Fashionable Header Navigation Bar -->
+    <header>
+        <div class="logo">SOCIETY SQUAD<span> SERVICES</span></div>
+        <nav>
+            <a href="#housekeeping">Housekeeping</a>
+            <a href="#carwash">Car Wash</a>
+            <a href="#driver">Drivers</a>
+            <a href="#household">Household Help</a>
+            <a href="#laundry">Laundry</a>
+            <a href="#events">Events</a>
+            <a href="#tatkal">Tatkal Tickets</a>
+            <a href="#cooking">Cooking Help</a>
+            <a href="#rapido">Emergency Ride</a>
+            <a href="#booking-portal" class="contact-btn" style="background: #ffbf00;">Book Online</a>
+        </nav>
+    </header>
+
+    <!-- Hero Frame -->
+    <section class="hero">
+        <span class="badge">Exclusive Community Partner</span>
+        <h1>Premium Neighborhood Support</h1>
+        <p>A bespoke collective of verified daily subscriptions and premium luxury estate management assistants.</p>
+        <div class="badge" style="background: var(--secondary); color: white; border: none;">
+            Serving: Omaxe Hills & Palash Parisar 2
+        </div>
+    </section>
+
+    <!-- Service 1: Housekeeping -->
+    <section id="housekeeping" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Custom Architecture Plan</span>
+            <h2>Housekeeping Care</h2>
+            <ul>
+                <li>Deep structural cleaning across all Bedrooms, Halls, and Kitchen spaces.</li>
+                <li>Artisan Garden landscape cleaning, plant grooming, and structural watering routines.</li>
+                <li>Highly managed, verified elite home keepers curated for complete peace of mind.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="1.jpg" alt="Housekeeping">
+        </div>
+    </section>
+
+    <!-- Service 2: Car Wash -->
+    <section id="carwash" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Daily / Monthly Subscription</span>
+            <h2>Automotive Care</h2>
+            <ul>
+                <li>Impeccable premium daily surface wiping and dust extraction right at your spot.</li>
+                <li>Comprehensive scheduled monthly deep washing protocols.</li>
+                <li>Gentle, non-abrasive equipment tailored to high-end cars and sport bikes.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="exterior-car-wash.jpg" alt="Car Wash">
+        </div>
+    </section>
+
+    <!-- Service 3: Drivers -->
+    <section id="driver" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Daily commutes / Monthly schedules</span>
+            <h2>Professional Chauffeurs</h2>
+            <ul>
+                <li>Roster of strictly vetted, elite Car and Bike drivers.</li>
+                <li>Flawlessly aligned for daily morning office shifts or run schedules.</li>
+                <li>Fully insured, polite, and verified against community gate management rules.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="driver.jpg" alt="Drivers">
+        </div>
+    </section>
+
+    <!-- Service 4: Household Help -->
+    <section id="household" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">On-Demand Concierge</span>
+            <h2>Household Assistance</h2>
+            <ul>
+                <li>Seamless intra-society or regional relocation packing, asset care, and loading assistance.</li>
+                <li>Dedicated shopping handlers for rapid medicine, grocery, and local market errands.</li>
+                <li>Reliable backup options for peak household moving hours.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="shifting.png" alt="Household Help">
+        </div>
+    </section>
+
+    <!-- Service 5: Laundry -->
+    <section id="laundry" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Daily Cycle Routine</span>
+            <h2>Ironing & Pressing</h2>
+            <ul>
+                <li>Exclusively focused on high-heat precision crisp laundry pressing only.</li>
+                <li>Effortless valet-style doorstep pickup and prompt return routines.</li>
+                <li>Perfected garment folding and formal placement architectures.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="press.jpg" alt="Laundry Pressing">
+        </div>
+    </section>
+
+    <!-- Service 6: Events -->
+    <section id="events" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Per-Event Planning</span>
+            <h2>Event Organisation</h2>
+            <ul>
+                <li>Complete end-to-end design frameworks for intimate home Birthdays and Anniversaries.</li>
+                <li>Bespoke configurations for custom neighborhood garden mini-galas and home milestones.</li>
+                <li>Local designer balloon frameworks, table styling, and partner vendor curation.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="birth.webp" alt="Event Planning">
+        </div>
+    </section>
+
+    <!-- Service 7: Tatkal Confirm Ticket -->
+    <section id="tatkal" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Priority Booking Window</span>
+            <h2>Tatkal Confirm Ticket Assistance</h2>
+            <ul>
+                <li>Swift, optimized routing configurations for premium train travel allocations.</li>
+                <li>Dedicated reservation guidance to ensure minimal delay windows during morning rush periods.</li>
+                <li>Secure document validation aligned with official terminal travel policies.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="ticket.webp" alt="Tatkal Ticket Booking">
+        </div>
+    </section>
+
+    <!-- Service 8: Home Cooking Assistance -->
+    <section id="cooking" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Daily Meal Formats</span>
+            <h2>Home Cooking Assistance</h2>
+            <ul>
+                <li>Expert preparation assistants managing raw vegetable chopping, spice blending, and kitchen prep.</li>
+                <li>Highly hygienic, community-vetted culinary helpers tailored to family taste traditions.</li>
+                <li>Flexible schedules serving early morning breakfast spreads or comprehensive dinner routines.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="kitchen.png" alt="Home Cooking Help">
+        </div>
+    </section>
+
+    <!-- Service 9: Emergency Rapido Services -->
+    <section id="rapido" class="service-section">
+        <div class="service-content">
+            <span class="plan-badge">Immediate On-Demand Dispatch</span>
+            <h2>Emergency Ride Logistics</h2>
+            <ul>
+                <li>Instant, high-speed regional bike or vehicle transport for unexpected priority transits.</li>
+                <li>Dedicated premium community response operators standing by for rapid exit gates coordination.</li>
+                <li>Optimized navigation bypass for essential medicine pickups or vital office deadlines.</li>
+            </ul>
+        </div>
+        <div class="service-visual">
+            <img src="rapido-logo-.jpg" alt="Emergency Ride Support">
+        </div>
+    </section>
+
+    <!-- NEW COMBINED PRIVATE BOOKING PORTAL FORM SECTION -->
+    <section id="booking-portal" class="booking-portal-section">
+        <div class="form-container">
+            <h2>SOCIETY SQUAD SERVICES</h2>
+            <p class="subtitle">Premium Concierge & Slot Booking Portal</p>
+            
+            <!-- Form setup with id for JavaScript tracking -->
+            <form id="sheetdb-form">
+                
+                <div class="form-group">
+                    <label>Your Full Name</label>
+                    <input type="text" name="data[name]" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="data[phone]" placeholder="Enter mobile number" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Your Society</label>
+                    <select name="data[society]" required>
+                        <option value="">-- Choose Society --</option>
+                        <option value="Omaxe Hills">Omaxe Hills</option>
+                        <option value="Palash Parisar 2">Palash Parisar 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Flat & Tower Number (Place)</label>
+                    <input type="text" name="data[flat_number]" placeholder="e.g., Tower B - 402" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Service</label>
+                    <select name="data[service]" required>
+                        <option value="">-- Choose Service --</option>
+                        <option value="Housekeeping">Housekeeping</option>
+                        <option value="Car Wash">Automotive Care (Car Wash)</option>
+                        <option value="Drivers">Professional Driver</option>
+                        <option value="Household Assistance">Household Assistance</option>
+                        <option value="Laundry">Ironing & Pressing</option>
+                        <option value="Events">Event Organisation</option>
+                        <option value="Tatkal Tickets">Tatkal Confirm Ticket</option>
+                        <option value="Home Cooking">Household Assistance (Home Cooking Service)</option>
+                        <option value="Tiffin Service">Tiffin Service</option>
+                        <option value="Emergency Ride">Emergency Rapido Service</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Date & Time Slot</label>
+                    <input type="datetime-local" name="data[booking_time]" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-text">Submit Booking Request</button>
+                
+                <p class="privacy-note">🔒 Secure connection. Your details are strictly visible to the 3S Administration only.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- DATABASE INTERACTION JAVASCRIPT -->
+    <script>
+        var form = document.getElementById('sheetdb-form');
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          
+          const button = document.getElementById('submit-text');
+          button.innerHTML = "Processing Booking...";
+          button.style.background = "#aaaaaa";
+
+          // PASTE YOUR SHEETDB API URL HERE BELOW
+          fetch('https://sheetdb.io/api/v1/YOURhttps://sheetdb.io/api/v1/y5avjtfhgf2lc_API_ID_HERE', {
+              method : 'POST',
+              body: new FormData(document.getElementById("sheetdb-form")),
+          }).then(
+              response => response.json()
+          ).then((html) => {
+             button.innerHTML = "✓ Booking Successful!";
+             button.style.background = "#28a745";
+             button.style.color = "#ffffff";
+             form.reset();
+             alert('Thank you! Your private slot has been locked into our database. The 3S Team will contact you shortly.');
+             setTimeout(() => {
+                 button.innerHTML = "Submit Booking Request";
+                 button.style.background = "#ffbf00";
+                 button.style.color = "#121212";
+             }, 4000);
+          }).catch(error => {
+              alert('Something went wrong. Please check your internet connection.');
+              button.innerHTML = "Submit Booking Request";
+              button.style.background = "#ffbf00";
+          });
+        });
+    </script>
+
+</body>
+</html>

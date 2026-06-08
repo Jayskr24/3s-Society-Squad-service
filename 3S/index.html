@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Society Squad Services | 3S Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #0f172a; /* Slate 900 */
@@ -86,7 +88,7 @@
             border-radius: 30px; 
             text-decoration: none; 
             transition: all 0.3s ease; 
-            box-shadow: 0 4px 14 rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
         }
         
         .contact-btn:hover { 
@@ -339,12 +341,10 @@
 </head>
 <body>
 
-    <!-- Fixed Floating Booking Button -->
     <a href="#booking-portal" class="floating-booking-btn">
         ⚡ Book Service Slot
     </a>
 
-    <!-- Fashionable Header Navigation Bar -->
     <header>
         <div class="logo">SOCIETY SQUAD<span> SERVICES</span></div>
         <nav>
@@ -360,7 +360,6 @@
         </nav>
     </header>
 
-    <!-- Hero Frame -->
     <section class="hero">
         <span class="badge">Exclusive Community Partner</span>
         <h1>Premium Neighborhood Support</h1>
@@ -370,7 +369,6 @@
         </div>
     </section>
 
-    <!-- Service 1: Housekeeping -->
     <section id="housekeeping" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Custom Architecture Plan</span>
@@ -386,7 +384,6 @@
         </div>
     </section>
 
-    <!-- Service 2: Car Wash -->
     <section id="carwash" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Daily / Monthly Subscription</span>
@@ -402,7 +399,6 @@
         </div>
     </section>
 
-    <!-- Service 3: Drivers -->
     <section id="driver" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Daily commutes / Monthly schedules</span>
@@ -418,7 +414,6 @@
         </div>
     </section>
 
-    <!-- Service 4: Household Help -->
     <section id="household" class="service-section">
         <div class="service-content">
             <span class="plan-badge">On-Demand Concierge</span>
@@ -434,7 +429,6 @@
         </div>
     </section>
 
-    <!-- Service 5: Laundry -->
     <section id="laundry" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Daily Cycle Routine</span>
@@ -450,7 +444,6 @@
         </div>
     </section>
 
-    <!-- Service 6: Events -->
     <section id="events" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Per-Event Planning</span>
@@ -466,7 +459,6 @@
         </div>
     </section>
 
-    <!-- Service 7: Tatkal Confirm Ticket -->
     <section id="railwayticket" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Priority Booking Window</span>
@@ -481,7 +473,6 @@
         </div>
     </section>
 
-    <!-- Service 8: Home Cooking Assistance -->
     <section id="cooking" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Daily Meal Formats</span>
@@ -497,7 +488,6 @@
         </div>
     </section>
 
-    <!-- Service 9: Emergency Rapido Services -->
     <section id="two-wheeler" class="service-section">
         <div class="service-content">
             <span class="plan-badge">Immediate On-Demand Dispatch</span>
@@ -513,18 +503,16 @@
         </div>
     </section>
 
-    <!-- NEW COMBINED PRIVATE BOOKING PORTAL FORM SECTION -->
     <section id="booking-portal" class="booking-portal-section">
         <div class="form-container">
             <h2>SOCIETY SQUAD SERVICES</h2>
             <p class="subtitle">Premium Concierge & Slot Booking Portal</p>
             
-            <!-- Form setup with id for JavaScript tracking -->
             <form id="sheetdb-form">
                 
                 <div class="form-group">
                     <label>Your Full Name</label>
-                    <input type="text" name="data[name]" placeholder="Enter your name" required>
+                    <input type="text" id="form-name" name="data[name]" placeholder="Enter your name" required>
                 </div>
 
                 <div class="form-group">
@@ -532,7 +520,6 @@
                     <input type="tel" id="primary-phone" name="data[phone]" placeholder="Enter mobile number" required>
                 </div>
 
-                <!-- NEW: WhatsApp Checkbox and Dynamic Input -->
                 <label class="checkbox-group">
                     <input type="checkbox" id="is-whatsapp" name="data[same_as_whatsapp]" value="Yes" checked>
                     <span>This is also my WhatsApp number</span>
@@ -542,11 +529,10 @@
                     <label>WhatsApp Number</label>
                     <input type="tel" id="whatsapp-phone" name="data[whatsapp]" placeholder="Enter WhatsApp number">
                 </div>
-                <!-- --------------------------------------- -->
 
                 <div class="form-group">
                     <label>Select Your Society</label>
-                    <select name="data[society]" required>
+                    <select id="form-society" name="data[society]" required>
                         <option value="">-- Choose Society --</option>
                         <option value="Omaxe Hills">Omaxe Hills</option>
                         <option value="Palash Parisar 2">Palash Parisar 2</option>
@@ -555,12 +541,12 @@
 
                 <div class="form-group">
                     <label>Flat & Tower Number (Place)</label>
-                    <input type="text" name="data[flat_number]" placeholder="e.g., Tower B - 402" required>
+                    <input type="text" id="form-flat" name="data[flat_number]" placeholder="e.g., Tower B - 402" required>
                 </div>
 
                 <div class="form-group">
                     <label>Select Service</label>
-                    <select name="data[service]" required>
+                    <select id="form-service" name="data[service]" required>
                         <option value="">-- Choose Service --</option>
                         <option value="Housekeeping">Housekeeping</option>
                         <option value="Car Wash">Automotive Care (Car Wash)</option>
@@ -587,9 +573,25 @@
         </div>
     </section>
 
-    <!-- DATABASE INTERACTION JAVASCRIPT -->
+    <section class="cta-section">
+        <h2>Connect With Our Squad</h2>
+        <p>Click below to text us directly on WhatsApp</p>
+        
+        <a href="https://wa.me/919430223372?text=Hi%20Saurav%20i%20want%20to%20make%20a%20booking" class="phone-link" target="_blank">
+            <i class="fab fa-whatsapp"></i> +91 94302 23372
+        </a><br>
+        
+        <a href="https://wa.me/919771142293?text=Hi%20Saurav%20i%20want%20to%20make%20a%20booking" class="phone-link" target="_blank">
+            <i class="fab fa-whatsapp"></i> +91 97711 42293
+        </a>
+
+        <div class="footer-text">
+            &copy; 2026 Society Squad Services. All Rights Reserved. Private Concierge Framework.
+        </div>
+    </section>
+
     <script>
-        // NEW: Toggle WhatsApp Input field logic
+        // Toggle WhatsApp Input field logic
         const whatsappCheckbox = document.getElementById('is-whatsapp');
         const whatsappContainer = document.getElementById('whatsapp-input-container');
         const whatsappInputField = document.getElementById('whatsapp-phone');
@@ -609,48 +611,58 @@
         // Form Submit Logic
         var form = document.getElementById('sheetdb-form');
         form.addEventListener("submit", e => {
-          e.preventDefault();
-          
-          const button = document.getElementById('submit-text');
-          const originalText = button.innerHTML;
-          
-          button.innerHTML = "Processing Booking...";
-          button.style.background = "#aaaaaa";
+            e.preventDefault();
+            
+            const button = document.getElementById('submit-text');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = "Processing Booking...";
+            button.style.background = "#aaaaaa";
 
-          // Create FormData Object
-          let formData = new FormData(form);
+            // Fetch dynamic values to formulate WhatsApp confirmation message
+            const userName = document.getElementById('form-name').value;
+            const userService = document.getElementById('form-service').value;
+            const userSociety = document.getElementById('form-society').value;
+            const userFlat = document.getElementById('form-flat').value;
 
-          // AGAR Checkbox ticked hai, toh dynamically primary phone ko hi whatsapp column me daal denge sheetdb ke liye
-          if (whatsappCheckbox.checked) {
-              formData.set('data[whatsapp]', primaryPhoneField.value);
-          }
+            // Create FormData Object
+            let formData = new FormData(form);
 
-          fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc?sheet=Booking', {
-              method : 'POST',
-              body: formData,
-          }).then(
-              response => response.json()
-          ).then((html) => {
-             button.innerHTML = "✓ Booking Successful!";
-             button.style.background = "#28a745";
-             button.style.color = "#ffffff";
-             
-             form.reset();
-             whatsappContainer.style.display = 'none'; // reset to hidden state
-             
-             alert('Thank you for booking, our team will contact you as soon as possible ✨ 🎉');
-             
-             setTimeout(() => {
-                 button.innerHTML = originalText;
-                 button.style.background = "#ffbf00";
-                 button.style.color = "#121212";
-             }, 4000);
-          }).catch(error => {
-              alert('Something went wrong. Please check your internet connection.');
-              button.innerHTML = originalText;
-              button.style.background = "#ffbf00";
-              button.style.color = "#121212";
-          });
+            // AGAR Checkbox ticked hai, toh dynamically primary phone ko hi whatsapp column me daal denge sheetdb ke liye
+            if (whatsappCheckbox.checked) {
+                formData.set('data[whatsapp]', primaryPhoneField.value);
+            }
+
+            fetch('https://sheetdb.io/api/v1/y5avjtfhgf2lc?sheet=Booking', {
+                method : 'POST',
+                body: formData,
+            }).then(
+                response => response.json()
+            ).then((html) => {
+                button.innerHTML = "✓ Booking Successful!";
+                button.style.background = "#28a745";
+                button.style.color = "#ffffff";
+                
+                form.reset();
+                whatsappContainer.style.display = 'none'; // reset to hidden state
+                
+                alert('Thank you for booking, our team will contact you as soon as possible ✨ 🎉');
+                
+                // Form submit automatic text push structure
+                const customWaMsg = `Hi Saurav, I have submitted a booking request on the portal.%0A%0A*Details:*%0A- Name: ${encodeURIComponent(userName)}%0A- Service: ${encodeURIComponent(userService)}%0A- Society: ${encodeURIComponent(userSociety)}%0A- Flat/Tower: ${encodeURIComponent(userFlat)}`;
+                window.open(`https://wa.me/919430223372?text=${customWaMsg}`, '_blank');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = "#ffbf00";
+                    button.style.color = "#121212";
+                }, 4000);
+            }).catch(error => {
+                alert('Something went wrong. Please check your internet connection.');
+                button.innerHTML = originalText;
+                button.style.background = "#ffbf00";
+                button.style.color = "#121212";
+            });
         });
     </script>
 </body>
